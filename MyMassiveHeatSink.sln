@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMassiveHeatSink", "MyMassiveHeatSink.csproj", "{9216885C-F9EB-4CC0-A11D-D9D5B8E99552}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9216885C-F9EB-4CC0-A11D-D9D5B8E99552}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9216885C-F9EB-4CC0-A11D-D9D5B8E99552}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9216885C-F9EB-4CC0-A11D-D9D5B8E99552}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9216885C-F9EB-4CC0-A11D-D9D5B8E99552}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {349BC78D-08C4-4553-B093-542A7C0EFE2B}
+	EndGlobalSection
+EndGlobal
