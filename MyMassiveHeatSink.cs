@@ -1,6 +1,4 @@
-﻿using HarmonyLib;
-using PeterHan.PLib.Options;
-using TUNING;
+﻿using TUNING;
 using UnityEngine;
 using static ElementConverter;
 using static Klei.SimUtil;

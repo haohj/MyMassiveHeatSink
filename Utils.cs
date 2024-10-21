@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-;
 
 namespace MyMassiveHeatSink
 {
@@ -20,7 +19,6 @@ namespace MyMassiveHeatSink
             }
         }
 
-        // Token: 0x0600000E RID: 14 RVA: 0x0000214C File Offset: 0x0000034C
         public static void Localize(Type root)
         {
             ModUtil.RegisterForTranslation(root);
@@ -50,10 +48,8 @@ namespace MyMassiveHeatSink
             LocString.CreateLocStringKeys(root, "");
         }
 
-        // Token: 0x04000002 RID: 2
         private static Utils.ModInfo _modinfo;
 
-        // Token: 0x0200000C RID: 12
         public class ModInfo
         {
             public ModInfo()
