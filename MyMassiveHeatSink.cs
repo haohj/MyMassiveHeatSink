@@ -51,27 +51,32 @@ namespace MyMassiveHeatSink
                 component.Temperature = 294.15f;
                 go.AddOrGet<LoopingSounds>();
                 go.AddOrGet<Storage>().capacityKg = 0.099999994f;
+                //设置消耗氢气
+                /*go.AddOrGet<ElementConverter>().consumedElements = new ElementConverter.ConsumedElement[]
+                {
+                    new ElementConverter.ConsumedElement(ElementLoader.FindElementByHash(SimHashes.Hydrogen).tag, 0.01f,
+                        true)
+                };*/
+                ElementConverter elementConverter = go.AddComponent<ElementConverter>();
+                elementConverter.consumedElements = new ElementConverter.ConsumedElement[]
+                {
+                    new ElementConverter.ConsumedElement(GameTags.Gas, 0.05f, true)
+                };
+                //管道输出消耗配置
                 ConduitConsumer conduitConsumer = go.AddOrGet<ConduitConsumer>();
                 conduitConsumer.conduitType = ConduitType.Gas;
                 conduitConsumer.consumptionRate = 1f;
-                conduitConsumer.capacityTag = GameTagExtensions.Create(SimHashes.Hydrogen);
+                //设置元素，其它元素输入则会提示元素错误
+                //conduitConsumer.capacityTag = GameTagExtensions.Create(SimHashes.Hydrogen);
+                conduitConsumer.capacityTag = GameTags.Gas;
                 conduitConsumer.capacityKG = 0.099999994f;
                 conduitConsumer.forceAlwaysSatisfied = true;
                 conduitConsumer.wrongElementResult = ConduitConsumer.WrongElementResult.Dump;
-                //设置消耗氢气
-                go.AddOrGet<ElementConverter>().consumedElements = new ElementConverter.ConsumedElement[]
-                {
-                    new ElementConverter.ConsumedElement(ElementLoader.FindElementByHash(SimHashes.Hydrogen).tag, 0.01f, true)
-                };
-                //设置消耗天然气
-                go.AddOrGet<ElementConverter>().consumedElements = new ElementConverter.ConsumedElement[]
-                {
-                    new ElementConverter.ConsumedElement(ElementLoader.FindElementByHash(SimHashes.Methane).tag, 0.01f, true)
-                };
                 go.AddOrGetDef<PoweredActiveController.Def>();
                 go.GetComponent<Deconstructable>().allowDeconstruction = true;
                 go.AddOrGet<Demolishable>();
                 go.AddOrGetDef<PoweredActiveController.Def>().showWorkingStatus = true;
+                Prioritizable.AddRef(go);
             }
 
             //建造后预览

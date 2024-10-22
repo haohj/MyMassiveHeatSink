@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using KMod;
 using PeterHan.PLib.Core;
+using PeterHan.PLib.Options;
 
 namespace MyMassiveHeatSink
 {
@@ -11,6 +12,8 @@ namespace MyMassiveHeatSink
         {
             base.OnLoad(harmony);
             PUtil.InitLibrary(true);
+            new POptions().RegisterOptions(this, typeof(Config));
+            Debug.Log("菜单配置加载！");
             Patch.Namespace = base.GetType().Namespace;
         }
 
