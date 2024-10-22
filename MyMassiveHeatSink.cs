@@ -1,7 +1,6 @@
-﻿using TUNING;
+﻿using PeterHan.PLib.Options;
+using TUNING;
 using UnityEngine;
-using static ElementConverter;
-using static Klei.SimUtil;
 
 namespace MyMassiveHeatSink
 {
@@ -23,9 +22,14 @@ namespace MyMassiveHeatSink
                 BuildLocationRule build_location_rule = BuildLocationRule.OnFloor;
                 EffectorValues tier2 = NOISE_POLLUTION.NOISY.TIER5;
                 BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef(id, width, height, anim, hitpoints, construction_time, tier, raw_METALS, melting_point, build_location_rule, BUILDINGS.DECOR.BONUS.TIER2, tier2, 0.2f);
-                buildingDef.ExhaustKilowattsWhenActive = -16f;
+                //建筑物活动时的功率（负值表示吸热）
+                //buildingDef.ExhaustKilowattsWhenActive = -16f;
+                buildingDef.ExhaustKilowattsWhenActive = SingletonOptions<Config>.Instance.ExhaustKilowattsWhenActive;
+                //建筑物活动时的自身发热功率（负值表示冷却）
                 buildingDef.SelfHeatKilowattsWhenActive = -64f;
+                //是否可淹没
                 buildingDef.Floodable = false;
+                //是否可掩埋
                 buildingDef.Entombable = false;
                 buildingDef.AudioCategory = "Metal";
                 buildingDef.UtilityInputOffset = new CellOffset(0, 0);
@@ -38,7 +42,10 @@ namespace MyMassiveHeatSink
             {
                 go.GetComponent<KPrefabID>().AddTag(RoomConstraints.ConstraintTags.IndustrialMachinery, false);
                 go.AddOrGet<MassiveHeatSink>();
-                go.AddOrGet<MinimumOperatingTemperature>().minimumTemperature = 100f;
+                //最低温度是100k，也就是-173.15℃
+                //go.AddOrGet<MinimumOperatingTemperature>().minimumTemperature = 100f;
+                //改为动态调整，并且转换成摄氏度
+                go.AddOrGet<MinimumOperatingTemperature>().minimumTemperature = SingletonOptions<Config>.Instance.minimumTemperature + 273.15f; ;
                 PrimaryElement component = go.GetComponent<PrimaryElement>();
                 component.SetElement(SimHashes.Iron, true);
                 component.Temperature = 294.15f;
@@ -51,9 +58,15 @@ namespace MyMassiveHeatSink
                 conduitConsumer.capacityKG = 0.099999994f;
                 conduitConsumer.forceAlwaysSatisfied = true;
                 conduitConsumer.wrongElementResult = ConduitConsumer.WrongElementResult.Dump;
+                //设置消耗氢气
                 go.AddOrGet<ElementConverter>().consumedElements = new ElementConverter.ConsumedElement[]
                 {
                     new ElementConverter.ConsumedElement(ElementLoader.FindElementByHash(SimHashes.Hydrogen).tag, 0.01f, true)
+                };
+                //设置消耗天然气
+                go.AddOrGet<ElementConverter>().consumedElements = new ElementConverter.ConsumedElement[]
+                {
+                    new ElementConverter.ConsumedElement(ElementLoader.FindElementByHash(SimHashes.Methane).tag, 0.01f, true)
                 };
                 go.AddOrGetDef<PoweredActiveController.Def>();
                 go.GetComponent<Deconstructable>().allowDeconstruction = true;
