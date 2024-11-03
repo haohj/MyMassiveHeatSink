@@ -11,7 +11,7 @@ namespace MyMassiveHeatSink
     {
         //设置降温效果
         [Option("降温效果", "设置反熵热量中和器的每秒降温效果", "反熵热量中和器", Format = "F0")]
-        [Limit(-100.0, 100.0)]
+        [Limit(-500.0, 500.0)]
         [JsonProperty]
         public float ExhaustKilowattsWhenActive { get; set; }
         //设置最低工作温度

@@ -45,7 +45,7 @@ namespace MyMassiveHeatSink
                 //最低温度是100k，也就是-173.15℃
                 //go.AddOrGet<MinimumOperatingTemperature>().minimumTemperature = 100f;
                 //改为动态调整，并且转换成摄氏度
-                go.AddOrGet<MinimumOperatingTemperature>().minimumTemperature = SingletonOptions<Config>.Instance.minimumTemperature + 273.15f; ;
+                go.AddOrGet<MinimumOperatingTemperature>().minimumTemperature = SingletonOptions<Config>.Instance.minimumTemperature + 273.15f; 
                 PrimaryElement component = go.GetComponent<PrimaryElement>();
                 component.SetElement(SimHashes.Iron, true);
                 component.Temperature = 294.15f;
@@ -65,7 +65,7 @@ namespace MyMassiveHeatSink
                 //管道输出消耗配置
                 ConduitConsumer conduitConsumer = go.AddOrGet<ConduitConsumer>();
                 conduitConsumer.conduitType = ConduitType.Gas;
-                conduitConsumer.consumptionRate = 1f;
+                conduitConsumer.consumptionRate = 10f;
                 //设置元素，其它元素输入则会提示元素错误
                 //conduitConsumer.capacityTag = GameTagExtensions.Create(SimHashes.Hydrogen);
                 conduitConsumer.capacityTag = GameTags.Gas;
@@ -94,7 +94,7 @@ namespace MyMassiveHeatSink
             public const string ID = "MyMassiveHeatSink";
 
             // Token: 0x04000821 RID: 2081
-            private const float CONSUMPTION_RATE = 1f;
+            private const float CONSUMPTION_RATE = 10f;
 
             // Token: 0x04000822 RID: 2082
             private const float STORAGE_CAPACITY = 0.099999994f;
