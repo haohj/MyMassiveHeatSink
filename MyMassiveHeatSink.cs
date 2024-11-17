@@ -1,4 +1,5 @@
 ﻿using PeterHan.PLib.Options;
+using System.Collections.Generic;
 using TUNING;
 using UnityEngine;
 
@@ -35,13 +36,16 @@ namespace MyMassiveHeatSink
                 buildingDef.UtilityInputOffset = new CellOffset(0, 0);
                 buildingDef.InputConduitType = ConduitType.Gas;
                 buildingDef.ShowInBuildMenu = true;
-
+                //添加信号输入，方便自动化控制温度
+                buildingDef.LogicInputPorts = LogicOperationalController.CreateSingleInputPortList(new CellOffset(0, 0));
                 return buildingDef;
             }
             public override void DoPostConfigureComplete(GameObject go)
             {
                 go.GetComponent<KPrefabID>().AddTag(RoomConstraints.ConstraintTags.IndustrialMachinery, false);
                 go.AddOrGet<MassiveHeatSink>();
+                //添加信号输入，方便自动化控制温度
+                go.AddOrGet<LogicOperationalController>();
                 //最低温度是100k，也就是-173.15℃
                 //go.AddOrGet<MinimumOperatingTemperature>().minimumTemperature = 100f;
                 //改为动态调整，并且转换成摄氏度
@@ -65,7 +69,7 @@ namespace MyMassiveHeatSink
                 //管道输出消耗配置
                 ConduitConsumer conduitConsumer = go.AddOrGet<ConduitConsumer>();
                 conduitConsumer.conduitType = ConduitType.Gas;
-                conduitConsumer.consumptionRate = 10f;
+                conduitConsumer.consumptionRate = 100f;
                 //设置元素，其它元素输入则会提示元素错误
                 //conduitConsumer.capacityTag = GameTagExtensions.Create(SimHashes.Hydrogen);
                 conduitConsumer.capacityTag = GameTags.Gas;
