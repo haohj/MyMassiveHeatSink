@@ -56,11 +56,13 @@ namespace MyMassiveHeatSink
                 go.AddOrGet<LoopingSounds>();
                 go.AddOrGet<Storage>().capacityKg = 0.099999994f;
                 //设置消耗氢气
+                // TODO 正式发布版本
                 /*go.AddOrGet<ElementConverter>().consumedElements = new ElementConverter.ConsumedElement[]
                 {
                     new ElementConverter.ConsumedElement(ElementLoader.FindElementByHash(SimHashes.Hydrogen).tag, 0.01f,
                         true)
                 };*/
+                // TODO 个人使用版本
                 ElementConverter elementConverter = go.AddComponent<ElementConverter>();
                 elementConverter.consumedElements = new ElementConverter.ConsumedElement[]
                 {
