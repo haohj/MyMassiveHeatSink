@@ -112,9 +112,9 @@
 
 ### 1) 构建前准备
 
-- 安装 .NET Framework 4.7.2 Developer Pack（Targeting Pack）。
+- 安装 .NET Framework 4.8.1 Developer Pack（Targeting Pack）。
 - 若缺失会出现：
-  - `error MSB3644: 找不到 .NETFramework,Version=v4.7.2 的引用程序集`
+  - `error MSB3644: 找不到 .NETFramework,Version=v4.8.1 的引用程序集`
 
 ### 2) 编译 DLL
 
