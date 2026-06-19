@@ -34,16 +34,16 @@ namespace MyMassiveHeatSink
                     /// <summary>
                     /// 建筑名称（可点击链接样式）。
                     /// </summary>
-                    public static LocString NAME = UI.FormatAsLink("MassiveHeatSink", "MYMASSIVEHEATSINK");
+                    public static LocString NAME = UI.FormatAsLink("反熵热量中和器", "MYMASSIVEHEATSINK");
 
                     /// <summary>
                     /// 建筑效果说明（建造菜单/信息面板显示）。
                     /// </summary>
-                    public static LocString EFFECT = "A self-sustaining machine powered by what appears to be refined \nAbsorbs and neutralizes energy when provided with piped Hydrogen Gas.";
+                    public static LocString EFFECT = "一种自我维持的机器，似乎由精炼的中子质供能。\n当提供管道氢气时，会吸收并中和热量。";
                     /// <summary>
                     /// 建筑描述（当前为空，可按发布版本补充 lore 文本）。
                     /// </summary>
-                    public static LocString DESC = "";
+                    public static LocString DESC = "一个可配置的反熵热量中和器。";
                 }
             }
         }

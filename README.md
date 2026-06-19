@@ -131,7 +131,9 @@ dotnet build .\MyMassiveHeatSink.csproj -c Release
   mod.yaml
   mod_info.yaml
   README.md
-  translations/        (如果有多语言文件)
+  translations/
+    zh.po
+    en.po
 ```
 
 本仓库里元数据文件位于：
@@ -140,6 +142,12 @@ dotnet build .\MyMassiveHeatSink.csproj -c Release
 - `mod-config/mod_info.yaml`
 
 打包时请将它们复制到 `<mod_root>` 根目录（与 DLL 同级）。
+
+翻译文件注意事项：
+
+- `translations` 目录必须与 `MyMassiveHeatSink.dll` 同级。
+- 如果漏掉 `translations/zh.po` 或 `translations/en.po`，对应语言会回退到代码默认文案。
+- 不要把翻译文件放在 `mod-config/translations` 作为最终发布路径。
 
 ### 4) 本地安装测试（不经过工坊）
 
@@ -180,6 +188,7 @@ dotnet build .\MyMassiveHeatSink.csproj -c Release
 
 - 建议与会修改同一建筑定义（`MassiveHeatSink`）的 Mod 错峰排查冲突。
 - 若遇到异常，优先检查配置值是否超出合理范围、是否有其他温度系统改动 Mod 并存。
+- 发布包中务必包含 `translations/` 目录（与 DLL 同级），否则本地化不会生效。
 
 ## 致谢
 
