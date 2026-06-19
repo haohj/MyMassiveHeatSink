@@ -77,6 +77,8 @@
     <Compile Include="MyMassiveHeatSink.cs" />
     <Compile Include="Patch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SetConsumerTags.cs" />
+    <Compile Include="SetMassiveHeatSinkConfig.cs" />
     <Compile Include="STRINGS.cs" />
     <Compile Include="Study.cs" />
     <Compile Include="Utils.cs" />
