@@ -94,8 +94,8 @@ namespace MyMassiveHeatSink
         /// </summary>
         internal void SyncInstanceTemperature()
         {
-            float clampedC = Mathf.Clamp(this.AA, MinTemperatureC, MaxTemperatureC);
-            this.AA = clampedC;
+            float clampedC = Mathf.Clamp(this.CurrentMinimumTemperatureC, MinTemperatureC, MaxTemperatureC);
+            this.CurrentMinimumTemperatureC = clampedC;
             // 建筑内可调：直接作用于当前建筑实例，不修改全局配置。
             this.minimumOperatingTemperature.minimumTemperature = clampedC + CelsiusToKelvin;
         }
@@ -105,7 +105,7 @@ namespace MyMassiveHeatSink
         /// </summary>
         public float GetSliderValue(int index)
         {
-            return this.AA;
+            return this.CurrentMinimumTemperatureC;
         }
 
         /// <summary>
@@ -125,9 +125,9 @@ namespace MyMassiveHeatSink
         {
             base.OnSpawn();
             // 新建建筑时，用当前全局配置作为初始值；存档加载时保留序列化值。
-            if (this.AA < MinTemperatureC || this.AA > MaxTemperatureC)
+            if (this.CurrentMinimumTemperatureC < MinTemperatureC || this.CurrentMinimumTemperatureC > MaxTemperatureC)
             {
-                this.AA = SingletonOptions<Config>.Instance.minimumTemperature;
+                this.CurrentMinimumTemperatureC = SingletonOptions<Config>.Instance.MinimumTemperatureC;
             }
             this.SyncInstanceTemperature();
         }
@@ -138,7 +138,7 @@ namespace MyMassiveHeatSink
         /// </summary>
         public void SetSliderValue(float value, int index)
         {
-            this.AA = value;
+            this.CurrentMinimumTemperatureC = value;
             this.SyncInstanceTemperature();
         }
         /// <summary>
@@ -161,13 +161,10 @@ namespace MyMassiveHeatSink
             SetMassiveHeatSinkConfig component = ((GameObject)data).GetComponent<SetMassiveHeatSinkConfig>();
             if (component != null)
             {
-                this.AA = component.AA;
+                this.CurrentMinimumTemperatureC = component.CurrentMinimumTemperatureC;
                 this.SyncInstanceTemperature();
             }
         }
-
-        //[MyCmpReq]
-        //public SingletonOptions<Config>.Instance.minimumTemperature conduitConsumer;
 
         /// <summary>
         /// 当前滑条值（序列化字段）：
@@ -175,6 +172,16 @@ namespace MyMassiveHeatSink
         /// </summary>
         [Serialize]
         public float AA = 100f;
+
+        /// <summary>
+        /// 语义化访问器：建筑实例最低工作温度（摄氏度）。
+        /// 保留 AA 序列化字段以兼容旧存档。
+        /// </summary>
+        private float CurrentMinimumTemperatureC
+        {
+            get { return this.AA; }
+            set { this.AA = value; }
+        }
 
         /// <summary>
         /// 当前建筑的最低工作温度组件（实例级生效目标）。

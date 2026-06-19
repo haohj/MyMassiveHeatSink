@@ -24,17 +24,17 @@ namespace MyMassiveHeatSink
             /// 安全下限：建筑主动换热功率（kW）。
             /// 值越小（越负）代表制冷越强；过强制冷会让局部单帧温度过低，可能越过模拟允许区间。
             /// </summary>
-            private const float MIN_SAFE_COOLING_KW = -64f;
+            private const float MinSafeCoolingKw = -64f;
             /// <summary>
             /// 安全下限：允许配置的最低工作温度（摄氏度）。
             /// 对应绝对零度上方的游戏安全值（约 100 K -> -173.15 C）。
             /// </summary>
-            private const float MIN_SAFE_TEMPERATURE_C = -173.15f;
+            private const float MinSafeTemperatureC = -173.15f;
             /// <summary>
             /// 安全上限：允许配置的最高工作温度（摄氏度）。
             /// 上限本身不是模拟硬限制，主要用于约束 UI 输入，防止过度配置导致玩法异常。
             /// </summary>
-            private const float MAX_SAFE_TEMPERATURE_C = 200f;
+            private const float MaxSafeTemperatureC = 200f;
 
             /// <summary>
             /// 创建建筑定义（BuildingDef）。
@@ -62,7 +62,7 @@ namespace MyMassiveHeatSink
                 // Clamp aggressive cooling to avoid driving simulation temperatures out of valid range.
                 buildingDef.ExhaustKilowattsWhenActive = Mathf.Max(
                     SingletonOptions<Config>.Instance.ExhaustKilowattsWhenActive,
-                    MIN_SAFE_COOLING_KW
+                    MinSafeCoolingKw
                 );
                 //建筑物活动时的自身发热功率（负值表示冷却）
                 buildingDef.SelfHeatKilowattsWhenActive = -64f;
@@ -97,9 +97,9 @@ namespace MyMassiveHeatSink
                 //go.AddOrGet<MinimumOperatingTemperature>().minimumTemperature = 100f;
                 //改为动态调整，并且转换成摄氏度
                 float minimumTemperatureC = Mathf.Clamp(
-                    SingletonOptions<Config>.Instance.minimumTemperature,
-                    MIN_SAFE_TEMPERATURE_C,
-                    MAX_SAFE_TEMPERATURE_C
+                    SingletonOptions<Config>.Instance.MinimumTemperatureC,
+                    MinSafeTemperatureC,
+                    MaxSafeTemperatureC
                 );
                 // 游戏内部温度单位是开尔文(K)，这里将摄氏度配置转换为 K。
                 go.AddOrGet<MinimumOperatingTemperature>().minimumTemperature = minimumTemperatureC + 273.15f;
@@ -192,12 +192,12 @@ namespace MyMassiveHeatSink
             /// <summary>
             /// 预留常量：理论输入消耗速率（当前未直接使用）。
             /// </summary>
-            private const float CONSUMPTION_RATE = 10f;
+            private const float ConsumptionRate = 10f;
 
             /// <summary>
             /// 预留常量：内部存储容量（当前由代码直接赋值，同步保留常量便于后续统一管理）。
             /// </summary>
-            private const float STORAGE_CAPACITY = 0.099999994f;
+            private const float StorageCapacity = 0.099999994f;
         }
     }
 }

@@ -29,11 +29,12 @@ namespace MyMassiveHeatSink
         /// <summary>
         /// 建筑最低工作温度（摄氏度）。
         /// 当环境低于该温度时，建筑将不再继续工作（由 MinimumOperatingTemperature 控制）。
+        /// 使用 JsonProperty("minimumTemperature") 兼容历史配置文件键名。
         /// </summary>
         [Option("最低工作温度", "设置反熵热量中和器的最低工作温度，单位是℃", "反熵热量中和器", Format = "F0")]
         [Limit(-173.0, 200.0)]
-        [JsonProperty]
-        public float minimumTemperature { get; set; }
+        [JsonProperty("minimumTemperature")]
+        public float MinimumTemperatureC { get; set; }
 
         /// <summary>
         /// 默认配置构造函数。
@@ -45,7 +46,7 @@ namespace MyMassiveHeatSink
             // 默认换热功率：-16kW（相对温和，接近原版平衡）。
             this.ExhaustKilowattsWhenActive = -16f;
             // 默认最低工作温度：100℃（现有项目逻辑保持一致）。
-            this.minimumTemperature = 100f;
+            this.MinimumTemperatureC = 100f;
         }
     }
 }
