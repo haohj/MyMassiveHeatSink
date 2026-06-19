@@ -97,6 +97,85 @@
 2. 启动游戏并在 Mod 列表中启用。
 3. 进入游戏后在研究与建造栏中确认建筑已注入。
 
+## 开发构建与打包
+
+### 1) 构建前准备
+
+- 安装 .NET Framework 4.7.2 Developer Pack（Targeting Pack）。
+- 若缺失会出现：
+  - `error MSB3644: 找不到 .NETFramework,Version=v4.7.2 的引用程序集`
+
+### 2) 编译 DLL
+
+在项目根目录执行（任选其一）：
+
+```powershell
+msbuild .\MyMassiveHeatSink.csproj /t:Build /p:Configuration=Release
+```
+
+```powershell
+dotnet build .\MyMassiveHeatSink.csproj -c Release
+```
+
+编译产物默认位于：
+
+- `bin/Release/MyMassiveHeatSink.dll`
+
+### 3) 组装 Mod 发布目录
+
+建议打包目录结构如下（`<mod_root>` 为最终发布目录）：
+
+```text
+<mod_root>/
+  MyMassiveHeatSink.dll
+  mod.yaml
+  mod_info.yaml
+  README.md
+  translations/        (如果有多语言文件)
+```
+
+本仓库里元数据文件位于：
+
+- `mod-config/mod.yaml`
+- `mod-config/mod_info.yaml`
+
+打包时请将它们复制到 `<mod_root>` 根目录（与 DLL 同级）。
+
+### 4) 本地安装测试（不经过工坊）
+
+将 `<mod_root>` 复制到 ONI 本地 Mod 目录：
+
+- `C:\Users\<你的用户名>\Documents\Klei\OxygenNotIncluded\mods\local\<mod_id>\`
+
+其中 `<mod_id>` 推荐使用：
+
+- `MyMassiveHeatSink`
+
+启动游戏后在 Local Mods 中启用并验证。
+
+## 上传到 Steam 创意工坊
+
+推荐流程（使用 ONI 内置上传）：
+
+1. 先按上面的“本地安装测试”准备好 `mods/local/<mod_id>`。
+2. 启动游戏，进入 Mod 管理界面。
+3. 在 Local Mods 中找到你的 Mod，点击 Upload/Update（上传/更新）。
+4. 填写更新说明并确认上传。
+
+上传前建议核对：
+
+- `mod.yaml` 的 `staticID` 与目录名、项目 ID 一致（当前为 `MyMassiveHeatSink`）。
+- `mod_info.yaml` 中 `version`、`minimumSupportedBuild` 已更新到目标版本。
+- `README` 与工坊说明同步（功能、配置项、兼容说明）。
+
+## 发布检查清单
+
+- Release 编译成功（生成最新 `MyMassiveHeatSink.dll`）。
+- `mod.yaml` / `mod_info.yaml` 位于包根目录且字段正确。
+- 进游戏可见建筑、可研究、可建造、可运行。
+- 气体输入确认为氢气、温度滑条可实例级调节。
+- 极端配置不会再触发温度断言。
+
 ## 兼容与注意事项
 
 - 建议与会修改同一建筑定义（`MassiveHeatSink`）的 Mod 错峰排查冲突。
