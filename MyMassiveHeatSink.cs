@@ -115,18 +115,18 @@ namespace MyMassiveHeatSink
                 go.AddOrGet<Storage>().capacityKg = 0.099999994f;
                 //设置消耗氢气
                 // TODO 正式发布版本
-                /*go.AddOrGet<ElementConverter>().consumedElements = new ElementConverter.ConsumedElement[]
+                go.AddOrGet<ElementConverter>().consumedElements = new ElementConverter.ConsumedElement[]
                 {
                     new ElementConverter.ConsumedElement(ElementLoader.FindElementByHash(SimHashes.Hydrogen).tag, 0.01f,
                         true)
-                };*/
+                };
                 // TODO 个人使用版本
-                ElementConverter elementConverter = go.AddComponent<ElementConverter>();
+                /* ElementConverter elementConverter = go.AddComponent<ElementConverter>();
                 elementConverter.consumedElements = new ElementConverter.ConsumedElement[]
                 {
                     // 当前版本允许任意气体作为输入，便于测试（正式发布可改回仅氢气）。
                     new ElementConverter.ConsumedElement(GameTags.Gas, 0.05f, true)
-                };
+                }; */
                 //管道输出消耗配置
                 ConduitConsumer conduitConsumer = go.AddOrGet<ConduitConsumer>();
                 conduitConsumer.conduitType = ConduitType.Gas;
@@ -135,7 +135,7 @@ namespace MyMassiveHeatSink
                 //设置元素，其它元素输入则会提示元素错误
                 conduitConsumer.capacityTag = GameTagExtensions.Create(SimHashes.Hydrogen);
                 //TODO 个人使用版本
-                conduitConsumer.capacityTag = GameTags.Gas;
+                //conduitConsumer.capacityTag = GameTags.Gas;
                 //conduitConsumer.capacityKG = 0.099999994f;
                 // 若管网供给不足，仍可保持“已满足”状态（偏测试/宽松行为）。
                 conduitConsumer.forceAlwaysSatisfied = true;
@@ -162,7 +162,6 @@ namespace MyMassiveHeatSink
                 //可以接受带Egg标签的物品
                 MassiveHeatSink massiveHeatSink = go.AddOrGet<MassiveHeatSink>();
                 //massiveHeatSink.AddDepositTag(GameTags.Egg);
-
             }
 
             //建造后预览
