@@ -13,6 +13,11 @@ namespace MyMassiveHeatSink
     public class SetMassiveHeatSinkConfig : KMonoBehaviour, ISingleSliderControl, ISliderControl
     {
         /// <summary>
+        /// ONI 内部“复制建筑设置”事件 ID。
+        /// </summary>
+        private const int CopySettingsEventId = -905833192;
+
+        /// <summary>
         /// 建筑安全温度下限（摄氏度）。
         /// </summary>
         private const float MinTemperatureC = -173f;
@@ -87,7 +92,7 @@ namespace MyMassiveHeatSink
         /// 将当前滑条值同步到当前建筑实例。
         /// 注意：本方法是组件内部同步入口，不是 Unity 的 MonoBehaviour.Update 帧回调。
         /// </summary>
-        internal void Update()
+        internal void SyncInstanceTemperature()
         {
             float clampedC = Mathf.Clamp(this.AA, MinTemperatureC, MaxTemperatureC);
             this.AA = clampedC;
@@ -124,7 +129,7 @@ namespace MyMassiveHeatSink
             {
                 this.AA = SingletonOptions<Config>.Instance.minimumTemperature;
             }
-            this.Update();
+            this.SyncInstanceTemperature();
         }
 
         /// <summary>
@@ -134,7 +139,7 @@ namespace MyMassiveHeatSink
         public void SetSliderValue(float value, int index)
         {
             this.AA = value;
-            this.Update();
+            this.SyncInstanceTemperature();
         }
         /// <summary>
         /// 预制体初始化阶段：
@@ -143,8 +148,7 @@ namespace MyMassiveHeatSink
         protected override void OnPrefabInit()
         {
             base.OnPrefabInit();
-            // -905833192 为 ONI 内部 CopyBuildingSettings 事件 ID。
-            base.Subscribe(-905833192, new Action<object>(this.OnCopySettings));
+            base.Subscribe(CopySettingsEventId, new Action<object>(this.OnCopySettings));
         }
 
         /// <summary>
@@ -155,11 +159,10 @@ namespace MyMassiveHeatSink
         internal void OnCopySettings(object data)
         {
             SetMassiveHeatSinkConfig component = ((GameObject)data).GetComponent<SetMassiveHeatSinkConfig>();
-            bool flag = component == null;
-            if (!flag)
+            if (component != null)
             {
                 this.AA = component.AA;
-                this.Update();
+                this.SyncInstanceTemperature();
             }
         }
 

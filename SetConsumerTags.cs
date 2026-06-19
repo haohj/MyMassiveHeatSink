@@ -1,15 +1,11 @@
-﻿using System;
-using STRINGS;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MyMassiveHeatSink
 {
     /// <summary>
     /// 可配置消耗物选项（预留实现）：
     /// 目标是向 IConfigurableConsumer 提供可选配方/标签集合。
-    /// 
-    /// 当前文件为“接口占位”状态，方法尚未实现；
-    /// 保留该类可避免后续扩展时重新搭骨架。
+    /// 当前实现提供“仅氢气”的安全默认行为，后续可扩展多选项。
     /// </summary>
     public class SetConsumerTags : KMonoBehaviour, IConfigurableConsumerOption, IConfigurableConsumerIngredient
     {
@@ -42,7 +38,6 @@ namespace MyMassiveHeatSink
 
         /// <summary>
         /// 返回选项唯一标识。
-        /// 未实现：后续可返回如 SimHashes.Hydrogen 对应标签。
         /// </summary>
         Tag IConfigurableConsumerOption.GetID()
         {

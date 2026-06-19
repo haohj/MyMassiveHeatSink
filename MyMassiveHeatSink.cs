@@ -1,5 +1,4 @@
 ﻿using PeterHan.PLib.Options;
-using System.Collections.Generic;
 using TUNING;
 using UnityEngine;
 
@@ -161,7 +160,7 @@ namespace MyMassiveHeatSink
                 go.AddOrGet<SetMassiveHeatSinkConfig>();
                 //BuildingTemplates.CreateDefaultStorage(go, false).SetDefaultStoredItemModifiers(MassiveHeatSinkConfig.IncubatorStorage);
                 //可以接受带Egg标签的物品
-                MassiveHeatSink massiveHeatSink = go.AddOrGet<MassiveHeatSink>();
+                go.AddOrGet<MassiveHeatSink>();
                 //massiveHeatSink.AddDepositTag(GameTags.Egg);
             }
 
