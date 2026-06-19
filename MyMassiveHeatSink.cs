@@ -137,8 +137,8 @@ namespace MyMassiveHeatSink
                 //TODO 个人使用版本
                 //conduitConsumer.capacityTag = GameTags.Gas;
                 //conduitConsumer.capacityKG = 0.099999994f;
-                // 若管网供给不足，仍可保持“已满足”状态（偏测试/宽松行为）。
-                conduitConsumer.forceAlwaysSatisfied = true;
+                // 生产环境应按真实供给判定，避免“无输入也持续工作”的异常行为。
+                conduitConsumer.forceAlwaysSatisfied = false;
                 // 错误元素处理策略：倾倒。
                 conduitConsumer.wrongElementResult = ConduitConsumer.WrongElementResult.Dump;
                 // 电力激活控制：显示工作状态并参与建筑功耗逻辑。

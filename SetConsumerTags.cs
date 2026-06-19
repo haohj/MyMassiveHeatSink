@@ -14,6 +14,16 @@ namespace MyMassiveHeatSink
     public class SetConsumerTags : KMonoBehaviour, IConfigurableConsumerOption, IConfigurableConsumerIngredient
     {
         /// <summary>
+        /// 默认允许标签：氢气。
+        /// </summary>
+        private static readonly Tag HydrogenTag = GameTagExtensions.Create(SimHashes.Hydrogen);
+
+        /// <summary>
+        /// 默认消耗量（kg/s）。
+        /// </summary>
+        private const float DefaultAmount = 0.01f;
+
+        /// <summary>
         /// 预制体初始化回调（当前无额外逻辑）。
         /// </summary>
         protected override void OnPrefabInit()
@@ -36,7 +46,7 @@ namespace MyMassiveHeatSink
         /// </summary>
         Tag IConfigurableConsumerOption.GetID()
         {
-            throw new NotImplementedException();
+            return HydrogenTag;
         }
 
         /// <summary>
@@ -44,7 +54,7 @@ namespace MyMassiveHeatSink
         /// </summary>
         string IConfigurableConsumerOption.GetName()
         {
-            throw new NotImplementedException();
+            return "Hydrogen";
         }
 
         /// <summary>
@@ -52,7 +62,7 @@ namespace MyMassiveHeatSink
         /// </summary>
         string IConfigurableConsumerOption.GetDetailedDescription()
         {
-            throw new NotImplementedException();
+            return "Only accepts Hydrogen gas from the input conduit.";
         }
 
         /// <summary>
@@ -60,7 +70,7 @@ namespace MyMassiveHeatSink
         /// </summary>
         string IConfigurableConsumerOption.GetDescription()
         {
-            throw new NotImplementedException();
+            return "Hydrogen only";
         }
 
         /// <summary>
@@ -68,7 +78,8 @@ namespace MyMassiveHeatSink
         /// </summary>
         Sprite IConfigurableConsumerOption.GetIcon()
         {
-            throw new NotImplementedException();
+            // 占位实现：后续可接入元素图标。
+            return null;
         }
 
         /// <summary>
@@ -76,7 +87,8 @@ namespace MyMassiveHeatSink
         /// </summary>
         IConfigurableConsumerIngredient[] IConfigurableConsumerOption.GetIngredients()
         {
-            throw new NotImplementedException();
+            // 当前选项本身即为唯一原料定义。
+            return new IConfigurableConsumerIngredient[] { this };
         }
 
         /// <summary>
@@ -84,7 +96,7 @@ namespace MyMassiveHeatSink
         /// </summary>
         Tag[] IConfigurableConsumerIngredient.GetIDSets()
         {
-            throw new NotImplementedException();
+            return new Tag[] { HydrogenTag };
         }
 
         /// <summary>
@@ -92,7 +104,7 @@ namespace MyMassiveHeatSink
         /// </summary>
         float IConfigurableConsumerIngredient.GetAmount()
         {
-            throw new NotImplementedException();
+            return DefaultAmount;
         }
     }
 }

@@ -11,11 +11,21 @@ namespace MyMassiveHeatSink
     public class BuildingFence
     {
         /// <summary>
+        /// 防止重复将建筑注册到建造菜单。
+        /// </summary>
+        private static bool planRegistered;
+
+        /// <summary>
         /// Prefix：在 LoadGeneratedBuildings 前执行。
         /// 提前注册可确保建筑在菜单初始化时可见。
         /// </summary>
         public static void Prefix()
         {
+            if (planRegistered)
+            {
+                return;
+            }
+
             //TODO 建筑栏对应关系
             /*基地=Base，氧气=Oxygen，电力=Power,食物=Food，水管=Plumbing，通风=HVAC，精炼=Refining，
              医疗=Medical，家具=Furniture，站台=Equipment，实用=Utilities，信号=Automation，运输=Conveyance，火箭=Rocketry，帮助=HEP
@@ -23,6 +33,7 @@ namespace MyMassiveHeatSink
             //建筑栏添加反熵热量中和器
             // 分类 "Utilities" 表示“实用”栏。
             ModUtil.AddBuildingToPlanScreen("Utilities", "MyMassiveHeatSink");
+            planRegistered = true;
         }
     }
 }

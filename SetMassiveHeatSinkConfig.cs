@@ -34,7 +34,8 @@ namespace MyMassiveHeatSink
         /// </summary>
         public float GetSliderMax(int index)
         {
-            return 300f;
+            // 与 Config 上限保持一致，避免 UI 可选值与实际生效值不一致。
+            return 200f;
         }
 
         /// <summary>

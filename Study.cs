@@ -16,13 +16,28 @@ namespace MyMassiveHeatSink
     public class Study
     {
         /// <summary>
+        /// 防止重复注入科技解锁项。
+        /// </summary>
+        private static bool techRegistered;
+
+        /// <summary>
         /// Postfix：原始 Db.Initialize 执行后触发。
         /// </summary>
         public static void Postfix()
         {
+            if (techRegistered)
+            {
+                return;
+            }
+
             //研究栏添加反熵热量中和器
             // PressureManagement: 对应原版“压力管理”科技。
-            Db.Get().Techs.Get("PressureManagement").unlockedItemIDs.Add("MyMassiveHeatSink");
+            var unlocked = Db.Get().Techs.Get("PressureManagement").unlockedItemIDs;
+            if (!unlocked.Contains("MyMassiveHeatSink"))
+            {
+                unlocked.Add("MyMassiveHeatSink");
+            }
+            techRegistered = true;
             global::Debug.Log("在数据初始化后执行");
         }
     }
