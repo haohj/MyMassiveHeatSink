@@ -1,7 +1,9 @@
 ﻿using HarmonyLib;
 using KMod;
+using Newtonsoft.Json;
 using PeterHan.PLib.Core;
 using PeterHan.PLib.Options;
+using System.IO;
 
 namespace MyMassiveHeatSink
 {
@@ -32,9 +34,43 @@ namespace MyMassiveHeatSink
             PUtil.InitLibrary(true);
             // 注册配置页面（对应 Config 类型）。
             new POptions().RegisterOptions(this, typeof(Config));
+            // 尝试从 Mod 根目录读取 config.json，覆盖默认/已保存配置。
+            LoadRootConfigOverride();
             Debug.Log("菜单配置加载！");
             // 缓存命名空间，避免后续反复反射读取。
             Patch.Namespace = base.GetType().Namespace;
+        }
+
+        /// <summary>
+        /// 从 Mod 根目录读取 config.json 并覆盖配置。
+        /// 读取失败时保持当前配置，不中断 Mod 加载。
+        /// </summary>
+        private static void LoadRootConfigOverride()
+        {
+            try
+            {
+                string configPath = Path.Combine(Path.GetDirectoryName(typeof(Patch).Assembly.Location), "config.json");
+                if (!File.Exists(configPath))
+                {
+                    return;
+                }
+
+                string json = File.ReadAllText(configPath);
+                Config fileConfig = JsonConvert.DeserializeObject<Config>(json);
+                if (fileConfig == null)
+                {
+                    return;
+                }
+
+                Config runtimeConfig = SingletonOptions<Config>.Instance;
+                runtimeConfig.ExhaustKilowattsWhenActive = fileConfig.ExhaustKilowattsWhenActive;
+                runtimeConfig.MinimumTemperatureC = fileConfig.MinimumTemperatureC;
+                Debug.Log("已从根目录 config.json 加载配置覆盖。");
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogWarning("读取根目录 config.json 失败，将使用现有配置。 " + e.Message);
+            }
         }
 
         /// <summary>

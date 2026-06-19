@@ -1,0 +1,44 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MyMassiveHeatSink\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. MyMassiveHeatSink.STRINGS.BUILDINGS.PREFABS.MYMASSIVEHEATSINK.NAME
+msgctxt "MyMassiveHeatSink.STRINGS.BUILDINGS.PREFABS.MYMASSIVEHEATSINK.NAME"
+msgid "<link=\"MYMASSIVEHEATSINK\">反熵热量中和器</link>"
+msgstr "<link=\"MYMASSIVEHEATSINK\">Anti-Entropie-Waermesenke</link>"
+
+#. MyMassiveHeatSink.STRINGS.BUILDINGS.PREFABS.MYMASSIVEHEATSINK.EFFECT
+msgctxt "MyMassiveHeatSink.STRINGS.BUILDINGS.PREFABS.MYMASSIVEHEATSINK.EFFECT"
+msgid ""
+"一种自我维持的机器，似乎由精炼的中子质供能。\n"
+"当提供管道氢气时，会吸收并中和热量。"
+msgstr ""
+"Eine selbstversorgende Maschine, die scheinbar mit veredeltem Neutronium "
+"betrieben wird.\n"
+"Bei Versorgung mit Wasserstoffgas aus Leitungen absorbiert und neutralisiert "
+"sie Waerme."
+
+#. MyMassiveHeatSink.STRINGS.BUILDINGS.PREFABS.MYMASSIVEHEATSINK.DESC
+msgctxt "MyMassiveHeatSink.STRINGS.BUILDINGS.PREFABS.MYMASSIVEHEATSINK.DESC"
+msgid "一个可配置的反熵热量中和器。"
+msgstr "Eine konfigurierbare Anti-Entropie-Waermesenke."
+
+#. MyMassiveHeatSink.STRINGS.K24M24GG24H0_UI.UI_1
+msgctxt "MyMassiveHeatSink.STRINGS.K24M24GG24H0_UI.UI_1"
+msgid "降温效果"
+msgstr "Kuehlleistung"
+
+#. MyMassiveHeatSink.STRINGS.K24M24GG24H0_UI.UI_2
+msgctxt "MyMassiveHeatSink.STRINGS.K24M24GG24H0_UI.UI_2"
+msgid "设置反熵热量中和器的每秒降温效果"
+msgstr "Legt die Kuehlleistung pro Sekunde der Waermesenke fest"
+
+#. MyMassiveHeatSink.STRINGS.K24M24GG24H0_UI.UI_3
+msgctxt "MyMassiveHeatSink.STRINGS.K24M24GG24H0_UI.UI_3"
+msgid "  ℃"
+msgstr "  °C"
+

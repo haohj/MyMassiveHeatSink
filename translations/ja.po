@@ -1,0 +1,42 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MyMassiveHeatSink\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. MyMassiveHeatSink.STRINGS.BUILDINGS.PREFABS.MYMASSIVEHEATSINK.NAME
+msgctxt "MyMassiveHeatSink.STRINGS.BUILDINGS.PREFABS.MYMASSIVEHEATSINK.NAME"
+msgid "<link=\"MYMASSIVEHEATSINK\">反熵热量中和器</link>"
+msgstr "<link=\"MYMASSIVEHEATSINK\">反エントロピー熱中和装置</link>"
+
+#. MyMassiveHeatSink.STRINGS.BUILDINGS.PREFABS.MYMASSIVEHEATSINK.EFFECT
+msgctxt "MyMassiveHeatSink.STRINGS.BUILDINGS.PREFABS.MYMASSIVEHEATSINK.EFFECT"
+msgid ""
+"一种自我维持的机器，似乎由精炼的中子质供能。\n"
+"当提供管道氢气时，会吸收并中和热量。"
+msgstr ""
+"精製ネートロニウムで駆動しているように見える自己維持型の装置です。\n"
+"配管された水素ガスが供給されると、熱を吸収して中和します。"
+
+#. MyMassiveHeatSink.STRINGS.BUILDINGS.PREFABS.MYMASSIVEHEATSINK.DESC
+msgctxt "MyMassiveHeatSink.STRINGS.BUILDINGS.PREFABS.MYMASSIVEHEATSINK.DESC"
+msgid "一个可配置的反熵热量中和器。"
+msgstr "設定可能な反エントロピー熱中和装置です。"
+
+#. MyMassiveHeatSink.STRINGS.K24M24GG24H0_UI.UI_1
+msgctxt "MyMassiveHeatSink.STRINGS.K24M24GG24H0_UI.UI_1"
+msgid "降温效果"
+msgstr "冷却効果"
+
+#. MyMassiveHeatSink.STRINGS.K24M24GG24H0_UI.UI_2
+msgctxt "MyMassiveHeatSink.STRINGS.K24M24GG24H0_UI.UI_2"
+msgid "设置反熵热量中和器的每秒降温效果"
+msgstr "反エントロピー熱中和装置の毎秒冷却効果を設定します"
+
+#. MyMassiveHeatSink.STRINGS.K24M24GG24H0_UI.UI_3
+msgctxt "MyMassiveHeatSink.STRINGS.K24M24GG24H0_UI.UI_3"
+msgid "  ℃"
+msgstr "  ℃"
+

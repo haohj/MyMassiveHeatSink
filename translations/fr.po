@@ -1,0 +1,43 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MyMassiveHeatSink\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. MyMassiveHeatSink.STRINGS.BUILDINGS.PREFABS.MYMASSIVEHEATSINK.NAME
+msgctxt "MyMassiveHeatSink.STRINGS.BUILDINGS.PREFABS.MYMASSIVEHEATSINK.NAME"
+msgid "<link=\"MYMASSIVEHEATSINK\">反熵热量中和器</link>"
+msgstr "<link=\"MYMASSIVEHEATSINK\">Neutralisateur Thermique Anti-Entropie</link>"
+
+#. MyMassiveHeatSink.STRINGS.BUILDINGS.PREFABS.MYMASSIVEHEATSINK.EFFECT
+msgctxt "MyMassiveHeatSink.STRINGS.BUILDINGS.PREFABS.MYMASSIVEHEATSINK.EFFECT"
+msgid ""
+"一种自我维持的机器，似乎由精炼的中子质供能。\n"
+"当提供管道氢气时，会吸收并中和热量。"
+msgstr ""
+"Une machine autonome qui semble etre alimentee par du neutronium raffine.\n"
+"Lorsqu'elle est alimentee en hydrogene via des conduites, elle absorbe et "
+"neutralise la chaleur."
+
+#. MyMassiveHeatSink.STRINGS.BUILDINGS.PREFABS.MYMASSIVEHEATSINK.DESC
+msgctxt "MyMassiveHeatSink.STRINGS.BUILDINGS.PREFABS.MYMASSIVEHEATSINK.DESC"
+msgid "一个可配置的反熵热量中和器。"
+msgstr "Un neutralisateur thermique anti-entropie configurable."
+
+#. MyMassiveHeatSink.STRINGS.K24M24GG24H0_UI.UI_1
+msgctxt "MyMassiveHeatSink.STRINGS.K24M24GG24H0_UI.UI_1"
+msgid "降温效果"
+msgstr "Effet de refroidissement"
+
+#. MyMassiveHeatSink.STRINGS.K24M24GG24H0_UI.UI_2
+msgctxt "MyMassiveHeatSink.STRINGS.K24M24GG24H0_UI.UI_2"
+msgid "设置反熵热量中和器的每秒降温效果"
+msgstr "Definit le refroidissement par seconde du neutralisateur thermique"
+
+#. MyMassiveHeatSink.STRINGS.K24M24GG24H0_UI.UI_3
+msgctxt "MyMassiveHeatSink.STRINGS.K24M24GG24H0_UI.UI_3"
+msgid "  ℃"
+msgstr "  °C"
+

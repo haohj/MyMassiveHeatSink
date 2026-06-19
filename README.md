@@ -14,6 +14,7 @@
   - 不可掩埋（`Entombable = false`）
 - 输入气体限制为**氢气**（Hydrogen only）。
 - 支持建筑内参数调节（每台建筑实例独立设置，可复制设置）。
+- 默认文案为中文，并提供多语言翻译文件（英文、日文、韩文、俄文、德文、法文）。
 
 ## 与原版差异
 
@@ -32,6 +33,9 @@
   - 含义：最低工作温度（单位：摄氏度）。
   - 低于该温度时建筑停止工作。
   - 当前限制：`[-173.0, 200.0]`。
+- `config.json`（Mod 根目录）
+  - 运行时会尝试读取并覆盖配置项。
+  - 若文件缺失或读取失败，回退到现有配置（不会中断 Mod 加载）。
 
 ## 建筑内调节（实例级）
 
@@ -59,10 +63,16 @@
 建议将配置调整到安全范围，例如：
 
 ```json
-{"ExhaustKilowattsWhenActive":-64.0,"minimumTemperature":-173.0}
+{"ExhaustKilowattsWhenActive":-64.0,"MinimumTemperatureC":-173.0}
 ```
 
 更保守配置：
+
+```json
+{"ExhaustKilowattsWhenActive":-16.0,"MinimumTemperatureC":100.0}
+```
+
+兼容旧键：
 
 ```json
 {"ExhaustKilowattsWhenActive":-16.0,"minimumTemperature":100.0}
@@ -88,6 +98,7 @@
 - `Study.cs`：科技树注入
 - `BuildingFence.cs`：建造栏注入
 - `STRINGS.cs`：本地化字符串键定义
+- `translations/`：多语言翻译文件（`zh/en/ja/ko/ru/de/fr`）
 - `Utils.cs`：翻译文件加载工具
 - `SetConsumerTags.cs`：可配置消耗项的预留实现
 
@@ -128,25 +139,37 @@ dotnet build .\MyMassiveHeatSink.csproj -c Release
 ```text
 <mod_root>/
   MyMassiveHeatSink.dll
+  config.json
   mod.yaml
   mod_info.yaml
   README.md
   translations/
     zh.po
     en.po
+    ja.po
+    ko.po
+    ru.po
+    de.po
+    fr.po
 ```
 
-本仓库里元数据文件位于：
+本仓库里元数据文件位于项目根目录：
 
-- `mod-config/mod.yaml`
-- `mod-config/mod_info.yaml`
+- `mod.yaml`
+- `mod_info.yaml`
 
-打包时请将它们复制到 `<mod_root>` 根目录（与 DLL 同级）。
+打包时它们与 `MyMassiveHeatSink.dll`、`config.json` 保持同级即可。
+
+配置文件注意事项：
+
+- 运行时会优先读取 Mod 根目录下的 `config.json`。
+- `config.json` 建议与 `MyMassiveHeatSink.dll` 同级打包发布。
+- 支持旧键 `minimumTemperature`（对应代码属性 `MinimumTemperatureC`）。
 
 翻译文件注意事项：
 
 - `translations` 目录必须与 `MyMassiveHeatSink.dll` 同级。
-- 如果漏掉 `translations/zh.po` 或 `translations/en.po`，对应语言会回退到代码默认文案。
+- 如果缺少某个语言的 `.po` 文件，该语言会回退到代码默认文案（中文）。
 - 不要把翻译文件放在 `mod-config/translations` 作为最终发布路径。
 
 ### 4) 本地安装测试（不经过工坊）
