@@ -13,6 +13,21 @@ namespace MyMassiveHeatSink
     public class SetMassiveHeatSinkConfig : KMonoBehaviour, ISingleSliderControl, ISliderControl
     {
         /// <summary>
+        /// 建筑安全温度下限（摄氏度）。
+        /// </summary>
+        private const float MinTemperatureC = -173f;
+
+        /// <summary>
+        /// 建筑安全温度上限（摄氏度）。
+        /// </summary>
+        private const float MaxTemperatureC = 200f;
+
+        /// <summary>
+        /// 摄氏度转开尔文的偏移值。
+        /// </summary>
+        private const float CelsiusToKelvin = 273.15f;
+
+        /// <summary>
         /// 滑条小数位数（0 表示整数步进）。
         /// </summary>
         public int SliderDecimalPlaces(int index)
@@ -26,7 +41,7 @@ namespace MyMassiveHeatSink
         /// </summary>
         public float GetSliderMin(int index)
         {
-            return -173f;
+            return MinTemperatureC;
         }
 
         /// <summary>
@@ -35,7 +50,7 @@ namespace MyMassiveHeatSink
         public float GetSliderMax(int index)
         {
             // 与 Config 上限保持一致，避免 UI 可选值与实际生效值不一致。
-            return 200f;
+            return MaxTemperatureC;
         }
 
         /// <summary>
@@ -69,12 +84,15 @@ namespace MyMassiveHeatSink
         }
 
         /// <summary>
-        /// 将当前滑条值同步到全局配置。
+        /// 将当前滑条值同步到当前建筑实例。
         /// 注意：本方法是组件内部同步入口，不是 Unity 的 MonoBehaviour.Update 帧回调。
         /// </summary>
         internal void Update()
         {
-            SingletonOptions<Config>.Instance.minimumTemperature = this.AA;
+            float clampedC = Mathf.Clamp(this.AA, MinTemperatureC, MaxTemperatureC);
+            this.AA = clampedC;
+            // 建筑内可调：直接作用于当前建筑实例，不修改全局配置。
+            this.minimumOperatingTemperature.minimumTemperature = clampedC + CelsiusToKelvin;
         }
 
         /// <summary>
@@ -101,6 +119,11 @@ namespace MyMassiveHeatSink
         protected override void OnSpawn()
         {
             base.OnSpawn();
+            // 新建建筑时，用当前全局配置作为初始值；存档加载时保留序列化值。
+            if (this.AA < MinTemperatureC || this.AA > MaxTemperatureC)
+            {
+                this.AA = SingletonOptions<Config>.Instance.minimumTemperature;
+            }
             this.Update();
         }
 
@@ -148,7 +171,13 @@ namespace MyMassiveHeatSink
         /// 用于保存建筑实例自身设置，支持存档/读档恢复。
         /// </summary>
         [Serialize]
-        public float AA = -100f;
+        public float AA = 100f;
+
+        /// <summary>
+        /// 当前建筑的最低工作温度组件（实例级生效目标）。
+        /// </summary>
+        [MyCmpReq]
+        public MinimumOperatingTemperature minimumOperatingTemperature;
 
         /// <summary>
         /// 自动添加复制设置组件引用，确保“复制建筑设置”按钮可用。

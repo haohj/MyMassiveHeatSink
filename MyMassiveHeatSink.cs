@@ -157,7 +157,8 @@ namespace MyMassiveHeatSink
             public override void ConfigureBuildingTemplate(GameObject go, Tag prefab_tag)
             {
                 Prioritizable.AddRef(go);
-                //go.AddOrGet<SetMassiveHeatSinkConfig>();
+                // 挂载建筑内滑条配置组件：允许每台建筑独立调整参数。
+                go.AddOrGet<SetMassiveHeatSinkConfig>();
                 //BuildingTemplates.CreateDefaultStorage(go, false).SetDefaultStoredItemModifiers(MassiveHeatSinkConfig.IncubatorStorage);
                 //可以接受带Egg标签的物品
                 MassiveHeatSink massiveHeatSink = go.AddOrGet<MassiveHeatSink>();
